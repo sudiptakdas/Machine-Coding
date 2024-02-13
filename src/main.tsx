@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import Home from './pages/Home.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
+import GridLight from './pages/GridLights.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Home />,
+  },
+  {
+    path: '/grid-light',
+    element: <GridLight />,
   },
   {
     path: '/*',
