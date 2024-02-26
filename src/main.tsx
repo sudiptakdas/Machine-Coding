@@ -5,6 +5,7 @@ import Home from './pages/Home.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import GridLight from './pages/GridLights.tsx';
 import Counter from './pages/Counter.tsx';
+import Rating from './pages/Rating.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/counter',
     element: <Counter />,
+  },
+  {
+    path: '/rating',
+    element: <Rating />,
   },
   {
     path: '/*',
