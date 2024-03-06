@@ -6,6 +6,7 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import GridLight from './pages/GridLights.tsx';
 import Counter from './pages/Counter.tsx';
 import Rating from './pages/Rating.tsx';
+import ProgressBarPage from './pages/ProgressBarPage.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: '/rating',
     element: <Rating />,
+  },
+  {
+    path: '/progress-bar',
+    element: <ProgressBarPage />,
   },
   {
     path: '/*',
