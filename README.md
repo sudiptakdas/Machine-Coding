@@ -10,13 +10,4 @@ If you are developing a production applications, we recommend updating the confi
 
 - Configure the top-level `parserOptions` property like this:
 
-```js
-export default {.
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+
