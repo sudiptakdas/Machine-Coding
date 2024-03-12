@@ -8,6 +8,5 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 If you are developing a production applications, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
 
