@@ -1,5 +1,2 @@
 # React + TypeScript + Vite
 
-
-
-ok
