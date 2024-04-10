@@ -9,6 +9,7 @@ import Rating from './pages/Rating.tsx';
 import ProgressBarPage from './pages/ProgressBarPage.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import TodoList from './pages/TodoList.tsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: '/progress-bar',
     element: <ProgressBarPage />,
+  },
+  {
+    path: '/todoList',
+    element: <TodoList />,
   },
   {
     path: '/*',
