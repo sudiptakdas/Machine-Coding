@@ -7,6 +7,7 @@ import GridLight from './pages/GridLights.tsx';
 import Counter from './pages/Counter.tsx';
 import Rating from './pages/Rating.tsx';
 import ProgressBarPage from './pages/ProgressBarPage.tsx';
+import Pagination from './pages/Pagination.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TodoList from './pages/TodoList.tsx';
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: '/todoList',
     element: <TodoList />,
+  },
+  {
+    path: '/pagination',
+    element: <Pagination />,
   },
   {
     path: '/*',
