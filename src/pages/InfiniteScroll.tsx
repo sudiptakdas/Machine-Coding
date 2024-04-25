@@ -1,88 +1,67 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const InfiniteScroll: React.FC = () => {
+const Pagination: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [total, setTotal] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
 
-  const pageSize = 10; // Number of products per page
-
-  const fetchProducts = async (page: number) => {
-    setLoading(true);
-    const res = await fetch(
-      `https://dummyjson.com/products?limit=${pageSize}&skip=${
-        page * pageSize - pageSize
-      }`
-    );
-    const resJson = await res.json();
-    setProducts((prevProducts) => [...prevProducts, ...resJson?.products]);
-    setTotal(resJson?.total);
-    setLoading(false);
-  };
+  const loader = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    fetchProducts(currentPage);
-  }, [currentPage]);
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await fetch(
+        `https://dummyjson.com/products?limit=10&page=${page}`
+      );
+      const data = await response.json();
+      setProducts((prevProducts) => [...prevProducts, ...data.products]);
+      setLoading(false);
+    };
 
-  const observer = useRef<IntersectionObserver | null>(null);
-  const lastProductRef = useRef<HTMLDivElement | null>(null);
+    fetchData();
+  }, [page]);
 
   useEffect(() => {
-    if (loading) return;
-    if (observer.current) observer.current.disconnect();
-    observer.current = new IntersectionObserver((entries) => {
-      if (
-        entries[0].isIntersecting &&
-        currentPage < Math.ceil(total / pageSize)
-      ) {
-        setCurrentPage((prevPage) => prevPage + 1);
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !loading) {
+        setPage((prevPage) => prevPage + 1);
       }
     });
-    if (lastProductRef.current)
-      observer.current.observe(lastProductRef.current);
-  }, [loading, currentPage, total, pageSize]);
+
+    if (loader.current) {
+      observer.observe(loader.current);
+    }
+
+    return () => {
+      if (loader.current) {
+        observer.unobserve(loader.current);
+      }
+    };
+  }, [loading]);
 
   return (
     <div className='p-6'>
       <h1 className='text-4xl font-semibold mb-4'>Products</h1>
       <div className='grid grid-cols-3 gap-4'>
-        {products.map((ele: any, idx: number) => {
-          if (idx === products.length - 1) {
-            return (
-              <div
-                key={idx}
-                ref={lastProductRef}
-                className='bg-gray-300 p-4 rounded-md w-[320px] h-[340px]'
-              >
-                <img
-                  src={ele?.thumbnail}
-                  className='rounded-lg w-full h-[250px] mb-4'
-                  alt={ele.title}
-                />
-                <h1>{ele?.title}</h1>
-              </div>
-            );
-          } else {
-            return (
-              <div
-                key={idx}
-                className='bg-gray-300 p-4 rounded-md w-[320px] h-[340px]'
-              >
-                <img
-                  src={ele?.thumbnail}
-                  className='rounded-lg w-full h-[250px] mb-4'
-                  alt={ele.title}
-                />
-                <h1>{ele?.title}</h1>
-              </div>
-            );
-          }
-        })}
+        {products.map((ele: any, idx: number) => (
+          <div
+            key={idx}
+            className='bg-gray-300 p-4 rounded-md w-[320px] h-[340px]'
+          >
+            <img
+              src={ele?.thumbnail}
+              className='rounded-lg w-full h-[250px] mb-4'
+              alt={ele.title}
+            />
+            <h1>{ele?.title}</h1>
+          </div>
+        ))}
       </div>
-      {loading && <p>Loading...</p>}
+      <div ref={loader} className='loader'>
+        {loading && <p>Loading...</p>}
+      </div>
     </div>
   );
 };
 
-export default InfiniteScroll;
+export default Pagination;
