@@ -9,6 +9,7 @@ import Rating from './pages/Rating.tsx';
 import ProgressBarPage from './pages/ProgressBarPage.tsx';
 import Pagination from './pages/Pagination.tsx';
 import InfiniteScroll from './pages/InfiniteScroll.tsx';
+import AutoComplete from './pages/AutoComplete.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TodoList from './pages/TodoList.tsx';
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: '/infiniteScroll',
     element: <InfiniteScroll />,
+  },
+  {
+    path: '/autoComplete',
+    element: <AutoComplete />,
   },
   {
     path: '/*',
