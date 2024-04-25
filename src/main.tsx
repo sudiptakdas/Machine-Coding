@@ -8,6 +8,7 @@ import Counter from './pages/Counter.tsx';
 import Rating from './pages/Rating.tsx';
 import ProgressBarPage from './pages/ProgressBarPage.tsx';
 import Pagination from './pages/Pagination.tsx';
+import InfiniteScroll from './pages/InfiniteScroll.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TodoList from './pages/TodoList.tsx';
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: '/pagination',
     element: <Pagination />,
+  },
+  {
+    path: '/infiniteScroll',
+    element: <InfiniteScroll />,
   },
   {
     path: '/*',
