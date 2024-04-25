@@ -32,11 +32,11 @@ const Pagination: React.FC = () => {
       observer.observe(loader.current);
     }
 
-    return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
-      }
-    };
+    // return () => {
+    //   if (loader.current) {
+    //     observer.unobserve(loader.current);
+    //   }
+    // };
   }, [loading]);
 
   return (
@@ -65,3 +65,10 @@ const Pagination: React.FC = () => {
 };
 
 export default Pagination;
+
+
+// Observing the Loader Element: The code observer.observe(loader.current) sets up the IntersectionObserver to watch the loader element.
+// Loader Element Becomes Visible: As the user scrolls down the page, eventually the loader element will come into view.
+// IntersectionObserver Callback: When the loader element intersects with the viewport (becomes visible), the IntersectionObserver's callback function is triggered.
+// Fetching More Data: Inside the IntersectionObserver's callback function, it checks if the loader element is intersecting with the viewport and if the component is not already in a loading state. If both conditions are met, it triggers the action to fetch more data from the API (in this case, it increments the page state, which will lead to fetching the next page of products).
+// Updating State and Re-rendering: After fetching more data, the component updates its state with the new data and re-renders, displaying the additional products fetched from the API.
